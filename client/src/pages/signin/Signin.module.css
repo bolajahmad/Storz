@@ -105,17 +105,12 @@
   color: var(--secondary-color);
 }
 
-#go-green:hover {
+.signup-alt span:hover {
   cursor: pointer;
 }
 
-#box-mid {
+.box-mid{
   text-align: center;
-}
-
-#app-logo {
-  width: 70px;
-  height: auto;
 }
 
 .login-storz {
@@ -135,6 +130,12 @@
 .login-storz {
   text-align: center;
 }
+
+.login-storz img {
+  width: 70px;
+  height: auto;
+}
+
 footer {
   position: fixed;
   text-align: center;
@@ -154,7 +155,7 @@ footer {
     max-width: 90%;
     height: auto;
   }
-  #box-mid {
+  .box-mid {
     margin-top: 30px;
   }
 

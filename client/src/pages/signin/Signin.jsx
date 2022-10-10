@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import "./Signin.css";
+import React, { useState, useContext, useRef } from "react";
+import styles from "./Signin.module.css";
 import signin_gradient from "../../assets/images/signin-gradient.png";
 import email_icon from "../../assets/icons/email.png";
 import user_icon from "../../assets/icons/user.png";
 import { UserContext } from "../../utils/UserContext";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { magic } from "../../utils/magic";
 import app_logo from "../../assets/icons/app-logo.png";
 import Axios from "axios";
@@ -22,9 +22,9 @@ function Signin() {
   const [newUser, setNewUser] = useState(false);
   const [user, setUser] = useContext(UserContext);
 
-  useEffect(() => {
-    user && user.issuer && navigate("/app/home");
-  }, [user, navigate]);
+  if (user && user.issuer) {
+    return <Navigate to="/app/home" />;
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -125,34 +125,38 @@ function Signin() {
 
   return (
     <motion.div
-      className="signin-con"
+      className={styles["signin-con"]}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
       <Toaster />
-      <img src={signin_gradient} alt="" className="signin-gradient" />
-      <div className="login-storz">
+      <img src={signin_gradient} alt="" className={styles["signin-gradient"]} />
+      <div className={styles["login-storz"]}>
         <div onClick={() => navigate("/")}>
-          <img id="app-logo" src={app_logo} alt="" />
+          <img src={app_logo} alt="" />
           <p>Storz</p>
         </div>
       </div>
 
       {!newUser ? (
         <>
-          <form className="signin-box" onSubmit={handleLogin}>
-            <div id="box-mid">
+          <form className={styles["signin-box"]} onSubmit={handleLogin}>
+            <div className={styles["box-mid"]}>
               <h2>Login</h2>
               <p>Login with your email</p>
             </div>
 
             {disabled && (
-              <img src={loadingg} alt="Loading" className="loadingg" />
+              <img
+                src={loadingg}
+                alt="Loading"
+                className={styles["loadingg"]}
+              />
             )}
 
-            <div className="inp-box">
+            <div className={styles["inp-box"]}>
               <img src={email_icon} alt="" />
               <input
                 ref={inpRef}
@@ -165,7 +169,7 @@ function Signin() {
             </div>
 
             {!disabled && (
-              <button type="submit" className="signin-btn">
+              <button type="submit" className={styles["signin-btn"]}>
                 Login
               </button>
             )}
@@ -173,13 +177,13 @@ function Signin() {
         </>
       ) : (
         <>
-          <form className="signin-box" onSubmit={handleLogin}>
-            <div id="box-mid">
+          <form className={styles["signin-box"]} onSubmit={handleLogin}>
+            <div className={styles["box-mid"]}>
               <h2>Sign Up</h2>
               <p>Create a new account with your email</p>
             </div>
             <br />
-            <div className="inp-box">
+            <div className={styles["inp-box"]}>
               <img src={user_icon} alt="" />
               <input
                 type="text"
@@ -189,7 +193,7 @@ function Signin() {
                 }}
               />
             </div>
-            <div className="inp-box">
+            <div className={styles["inp-box"]}>
               <img src={email_icon} alt="" />
               <input
                 type="text"
@@ -202,7 +206,7 @@ function Signin() {
             </div>
             <br />
             {!disabled && (
-              <button type="submit" className="signin-btn">
+              <button type="submit" className={styles["signin-btn"]}>
                 Sign Up
               </button>
             )}
@@ -211,10 +215,9 @@ function Signin() {
       )}
       {!newUser ? (
         <>
-          <div className="signup-alt">
+          <div className={styles["signup-alt"]}>
             Don't have an account yet?{" "}
             <span
-              id="go-green"
               onClick={() => {
                 setNewUser(true);
               }}
@@ -225,10 +228,9 @@ function Signin() {
         </>
       ) : (
         <>
-          <div className="signup-alt">
+          <div className={styles["signup-alt"]}>
             Already have an account?{" "}
             <span
-              id="go-green"
               onClick={() => {
                 setNewUser(false);
               }}

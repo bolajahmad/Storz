@@ -1,26 +1,22 @@
-import React, { useContext } from 'react'
-import './Main.css'
-import { Outlet, useNavigate } from 'react-router-dom'
-import Navbar from '../../components/navbar/Navbar'
-import { UserContext } from '../../utils/UserContext'
-import { useEffect } from 'react'
+import React, { useContext } from "react";
+import "./Main.css";
+import { Navigate, Outlet } from "react-router-dom";
+import Navbar from "../../components/navbar/Navbar";
+import { UserContext } from "../../utils/UserContext";
 
 function Main() {
-    const navigate = useNavigate();
-    const [user] = useContext(UserContext);
+  const [user] = useContext(UserContext);
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/signin');
-        }
-    }, [navigate, user])
+  if (!user) {
+    return <Navigate to="/signin" />;
+  }
 
-    return (
-        <div className='Main'>
-            <Navbar />
-            <Outlet />
-        </div>
-    )
+  return (
+    <div className="Main">
+      <Navbar />
+      <Outlet />
+    </div>
+  );
 }
 
-export default Main
+export default Main;

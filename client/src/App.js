@@ -1,12 +1,11 @@
-import './App.css';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from "react-router-dom";
 
-import { UserContext } from './utils/UserContext';
-import { magic } from './utils/magic';
-import { useEffect, useState } from 'react';
+import { UserContext } from "./utils/UserContext";
+import { magic } from "./utils/magic";
+import { useEffect, useState } from "react";
 
-import Cookies from 'universal-cookie';
-import AnimatedRoutes from '../src/components/AnimatedRoutes'
+import Cookies from "universal-cookie";
+import AnimatedRoutes from "../src/components/AnimatedRoutes";
 
 function App() {
   const cookie = new Cookies();
@@ -15,7 +14,7 @@ function App() {
   async function setCredentials(userData) {
     setUser(userData);
     if (!window.localStorage.getItem("didToken")) {
-      let newDidToken = await magic.user.getIdToken({lifespan: 24*60*60});
+      let newDidToken = await magic.user.getIdToken({ lifespan: 24 * 60 * 60 });
       window.localStorage.setItem("didToken", newDidToken);
     }
   }
@@ -35,7 +34,7 @@ function App() {
     <div className="App">
       <UserContext.Provider value={[user, setUser]}>
         <Router>
-            <AnimatedRoutes/>
+          <AnimatedRoutes />
         </Router>
       </UserContext.Provider>
     </div>
